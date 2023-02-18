@@ -1,9 +1,8 @@
-import os
-import subprocess
+import os, subprocess
 from libqtile import qtile, layout, widget, hook, bar
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
-from libqtile.layout.xmonad import MonadTall, MonadWide
+from libqtile.layout.xmonad import MonadTall
 from libqtile.layout.max import Max
 from libqtile.layout.floating import Floating
 from qtile_extras import widget
@@ -16,7 +15,7 @@ terminal = "alacritty"
 
 keys = [
     # Launch applications
-    Key([mod, "control"], "f", lazy.spawn('firefox'), desc="Launch browser"),
+    Key([mod, "control"], "f", lazy.spawn('brave'), desc="Launch browser"),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "r", lazy.spawn('rofi -show run')),
 
@@ -57,21 +56,21 @@ keys = [
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod, "shift"], "c", lazy.window.kill(), desc="Kill focused window"),
 
-    Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod], "q", lazy.reload_config(), desc="Reload the config"),
+    Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 ]
 
 # -----Groups---------------------------------------------------------------------------------------------------------------------------------
 
 groups = [
-    Group('1', label='WWW', matches=[Match(wm_class='firefox')], layout='max'),
-    Group('2', label='DEV', matches=[Match(wm_class='')], layout='monadtall'),
-    Group('3', label='SYS', matches=[Match(wm_class='')], layout='monadtall'),
-    Group('4', label='DOC', matches=[Match(wm_class='Thunar')], layout='monadtall'),
-    Group('5', label='CHAT', matches=[Match(wm_class='discord')], layout='monadtall'),
-    Group('6', label='MUS', matches=[Match(wm_class='Spotify')], layout='monadtall'),
+    Group('1', label='󰈹', matches=[Match(wm_class='Brave')], layout='max'),
+    Group('2', label='', matches=[Match(wm_class='Alacritty')], layout='monadtall'),
+    Group('3', label='', matches=[Match(wm_class='neovide')], layout='monadtall'),
+    Group('4', label='', matches=[Match(wm_class='Thunar, thunderbird, keepassxc')], layout='monadtall'),
+    Group('5', label='󱅯', matches=[Match(wm_class='discord')], layout='monadtall'),
+    Group('6', label='󰝚', matches=[Match(wm_class='Spotify')], layout='monadtall'),
 ]
 
 for i in groups: keys.extend([
@@ -146,12 +145,13 @@ screens = [Screen(top=bar.Bar([
         foreground=doom_one['green'],
     ),
     widget.GroupBox(
-        fontsize=9,
+        fontsize=15,
         active=doom_one['foreground'],
         inactive=doom_one['base4'],
         disable_drag=True,
         borderwidth=0,
         highlight_method='line',
+        hide_unused=True,
         highlight_color=doom_one['base0'],
         block_highlight_text_color=doom_one['green'],
     ),
