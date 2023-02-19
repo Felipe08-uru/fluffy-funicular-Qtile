@@ -1,3 +1,13 @@
+# Config file by:
+#        ___   ___ ____
+#       |__ \ / _ \___ \
+#   __ _   ) | | | |__) |
+#  / _` | / /| | | |__ <
+# | (_| |/ /_| |_| |__) |
+#  \__, |____|\___/____/
+#   __/ |            ______
+#  |___/            |______|
+
 import os, subprocess
 from libqtile import qtile, layout, widget, hook, bar
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
@@ -50,9 +60,6 @@ keys = [
     Key([mod, "control"], "j", lazy.layout.grow_down(), desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "n", lazy.layout.normalize(), desc="Reset all window sizes"),
-
-    # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split(), desc="Toggle between split and unsplit sides of stack"),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
